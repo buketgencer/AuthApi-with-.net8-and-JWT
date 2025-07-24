@@ -803,78 +803,75 @@ AuthApi/
 - [ ] Database connection string
 - [ ] CORS ayarları
 - [ ] Logging konfigürasyonu
-- [ ] Health checks
 - [ ] SSL/TLS sertifikaları
 - [ ] Environment variables
 - [ ] Database migrations
-- [ ] Monitoring ve alerting
 
-## 🚀 Docker Deployment
+## 🤝 Katkıda Bulunma
 
-### Dockerfile
+1. Fork yapın
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
+4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
+5. Pull Request oluşturun
 
-```dockerfile
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+### Geliştirme Rehberi
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-COPY ["AuthApi.csproj", "."]
-RUN dotnet restore "AuthApi.csproj"
-COPY . .
-WORKDIR "/src"
-RUN dotnet build "AuthApi.csproj" -c Release -o /app/build
+- Kod standartlarına uyun
+- Unit testler yazın
+- Commit mesajlarını açıklayıcı yazın
+- Documentation güncelleyin
 
-FROM build AS publish
-RUN dotnet publish "AuthApi.csproj" -c Release -o /app/publish
+## 📝 Lisans
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AuthApi.dll"]
-```
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
 
-### Docker Compose
+## 📞 İletişim
 
-```yaml
-version: '3.8'
-services:
-  authapi:
-    build: .
-    ports:
-      - "5000:80"
-      - "5001:443"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Data Source=/app/data/auth.db
-    volumes:
-      - ./data:/app/data
-    restart: unless-stopped
-```
+- **Proje Sahibi:** [Your Name]
+- **Email:** your.email@example.com
+- **GitHub:** [https://github.com/yourusername](https://github.com/yourusername)
 
-## 📈 Monitoring ve Logging
+## 🙏 Teşekkürler
 
-### Application Insights (Opsiyonel)
+Bu projeyi geliştirirken kullanılan açık kaynak kütüphaneler:
+
+- ASP.NET Core Team
+- Entity Framework Team
+- BCrypt.Net Contributors
+- JWT Contributors
+- Swagger/OpenAPI Contributors
+
+---
+
+**⭐ Bu projeyi beğendiyseniz, lütfen yıldız verin!**
+
+## 📈 Logging
+
+Projede ASP.NET Core'un built-in logging sistemi kullanılmaktadır:
 
 ```csharp
-services.AddApplicationInsightsTelemetry();
+_logger.LogInformation($"Yeni kullanıcı kaydedildi: {user.Username}");
+_logger.LogError(ex, "Kullanıcı kaydı sırasında hata oluştu");
 ```
 
-### Serilog Integration (Opsiyonel)
+### Log Seviyeleri
 
-```csharp
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .WriteTo.File("logs/authapi-.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
-```
+- **Information:** Normal işlem logları
+- **Warning:** Uyarı mesajları  
+- **Error:** Hata logları
+- **Debug:** Development ortamı için detaylı loglar
 
-### Health Checks
+## 🔄 Gelecek Geliştirmeler
 
-```csharp
-services.AddHealthChecks()
-    .AddDbContextCheck<AuthDbContext>();
+Proje için planlanan özellikler:
 
-app.Map
+- [ ] Şifre sıfırlama sistemi
+- [ ] Email doğrulama
+- [ ] Kullanıcı profil fotoğrafı
+- [ ] BMI geçmiş grafiği
+- [ ] Hedef kilo belirleme
+- [ ] API rate limiting
+- [ ] Redis cache entegrasyonu
+- [ ] Unit testler
+- [ ] Integration testler
