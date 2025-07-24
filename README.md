@@ -797,7 +797,7 @@ AuthApi/
 }
 ```
 
-### Deployment Checklist
+### Deplo
 
 - [ ] JWT Key production değeri
 - [ ] Database connection string
@@ -828,9 +828,8 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosy
 
 ## 📞 İletişim
 
-- **Proje Sahibi:** [Your Name]
-- **Email:** your.email@example.com
-- **GitHub:** [https://github.com/yourusername](https://github.com/yourusername)
+- **Proje Sahibi:** [Buket Gencer]
+- **Email:** gncrbuket@gmail.com
 
 ## 🙏 Teşekkürler
 
